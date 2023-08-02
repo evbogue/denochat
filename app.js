@@ -36,7 +36,7 @@ const composer = h('div', [
   keybox,
   textarea,
   h('button', {onclick: function () {
-    ws.send(localStorage.getItem('nickname') + ' | ' + textarea.value)
+    ws.send((localStorage.getItem('nickname') || 'Guest') + ' | ' + textarea.value)
     textarea.value = ''
   }}, ['Send'])
 ])
