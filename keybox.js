@@ -28,7 +28,7 @@ const pubkey = h('span', [keys.substring(0, 44)])
 
 const div = h('div', [
   pubkey,
-  h('button', {onclick: editKey}, ['Edit'])
+  h('button', {onclick: editKey}, ['Edit Public Key'])
 ])
 
 export const keybox = h('div', {id: 'composer'}, [div])

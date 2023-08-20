@@ -7,6 +7,7 @@ const channel = new BroadcastChannel('')
 channel.onmessage = e => {
   (e.target != channel) && channel.postMessage(e.data)
   sockets.forEach(s => s.send(e.data))
+  console.log(e.data)
 }
 
 Deno.serve((r) => {

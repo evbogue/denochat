@@ -1,4 +1,6 @@
 import { h } from './lib/misc.js'
+import { ws } from './ws.js'
+import { publish } from './bog.js'
 
 const nick = h('input', {placeholder: 'Nickname'})
 
@@ -14,9 +16,15 @@ export const nickbox = h('div', [
   nick, 
   h('button', {
     onclick: function () {
-      localStorage.setItem('nickname', nick.value)
-      empty.textContent = ' ✅'
+      if (nick.value) {
+        publish(nick.value, localStorage.getItem('key')).then(msg => {
+          const obj = {type: 'nick', bog: msg}
+          ws.send(JSON.stringify(obj))
+        })
+        localStorage.setItem('nickname', nick.value)
+        empty.textContent = ' ✅'
+      }
     }
-  }, ['Set']),
+  }, ['Set Nickname']),
   empty
 ])
